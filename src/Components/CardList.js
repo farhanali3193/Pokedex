@@ -3,7 +3,9 @@ import Card from './Card';
 
 
 class CardList extends React.Component {
-
+    if(true){
+        throw new Error('NOOO');
+    }
     render(){
         const pokemonArr = this.props.pokemonList.map(onePokemon => {
             return (
