@@ -16,7 +16,7 @@ class App extends React.Component{
   }
 
   getPokemonDetails (){
-    let url = 'https://pokeapi.co/api/v2/pokemon/?limit=36';
+    let url = 'https://pokeapi.co/api/v2/pokemon/?limit=151';
     fetch(url)
     .then(resp => resp.json())
     .then(data => {
