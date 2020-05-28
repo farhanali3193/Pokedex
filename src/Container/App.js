@@ -9,32 +9,34 @@ class App extends React.Component{
   constructor(){
     super();
     this.state = {
-    pokemons: [],
-    pokemonDetails: [],
-    searchField: ''
+      pokemons: [],
+      pokemonDetails: [],
+      searchField: ''
+    }
   }
-}
 
-getPokemonDetails (){
-  let url = 'https://pokeapi.co/api/v2/pokemon/?limit=151';
-  fetch(url)
-  .then(resp => resp.json())
-  .then(data => {
-    this.setState({pokemons: data.results})
-    this.state.pokemons.map(pokemon => {
-       fetch(pokemon.url)
-      .then(resp=> resp.json())
-      .then(data => {
-        // console.log('data abilities:', data.abilities);
-        const temp = this.state.pokemonDetails;
-        temp.push(data);
-        // this.state.pokemonDetails.push(data);
-        // console.log('temp', temp);
-        this.setState({pokemonDetails: temp});
+  getPokemonDetails (){
+    let url = 'https://pokeapi.co/api/v2/pokemon/?limit=17';
+    fetch(url)
+    .then(resp => resp.json())
+    .then(data => {
+      this.setState({pokemons: data.results}, () => {
+        this.state.pokemons.map(pokemon => {
+          fetch(pokemon.url)
+          .then(resp=> resp.json())
+          .then(data => {
+            console.log('data abilities:', data);
+            const temp = this.state.pokemonDetails;
+            temp.push(data);
+            // this.state.pokemonDetails.push(data);
+            // console.log('temp', temp);
+            this.setState({pokemonDetails: temp});
+          })
+        })
       })
     })
-  })
-}
+  }
+  
   componentDidMount(){
     this.getPokemonDetails();
   }
@@ -68,4 +70,3 @@ getPokemonDetails (){
 }
 
 export default App;
-
